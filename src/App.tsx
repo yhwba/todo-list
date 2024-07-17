@@ -8,9 +8,8 @@ import { HelmetProvider } from "react-helmet-async"
 import { darkTheme, lightTheme } from "./theme";
 import { useState } from "react";
 import { useRecoilValue } from 'recoil';
-import { isDarkAtom } from './atoms';
 
-import ToDoList from "./routes/ToDoList";
+import ToDoList from "./components/ToDoList";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -44,9 +43,6 @@ const GlobalStyle = createGlobalStyle`
   *[hidden] {
       display: none;
   }
-  body {
-    line-height: 1;
-  }
   menu, ol, ul {
     list-style: none;
   }
@@ -72,6 +68,8 @@ const GlobalStyle = createGlobalStyle`
     background-color:${props => props.theme.bgColor};
     color:${props => props.theme.textColor};
     line-height: 1.2;
+    padding: 5px;
+    min-height: 100vh;
   }
   a {
     text-decoration: none;
@@ -84,17 +82,18 @@ const GlobalStyle = createGlobalStyle`
     margin-top: 10px;
     padding: 20px;
   }
+  li{
+    list-style-type: none;
+  }
 `
 
 function App() {
-  const isDark = useRecoilValue(isDarkAtom)
   return (
     <>
       <HelmetProvider >
         <GlobalStyle />
         <ToDoList />
       </HelmetProvider>
-
     </>
   );
 }
